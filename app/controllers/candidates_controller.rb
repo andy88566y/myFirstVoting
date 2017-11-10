@@ -1,6 +1,7 @@
 class CandidatesController < ApplicationController
   #layout false
   before_action :find_candidate, only: [:edit, :update, :destroy, :vote]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     @candidates = Candidate.all
@@ -61,6 +62,13 @@ class CandidatesController < ApplicationController
   end
 
   def find_candidate
-    @candidate = Candidate.find_by(id: params[:id])
+    begin
+      @candidate = Candidate.find(params[:id])
+    rescue
+      redirect_to candidates_path, notice: "查無此候選人"
+    end
+  end
+  def record_not_found
+    render plain: "查無資料", status: 404
   end
 end
