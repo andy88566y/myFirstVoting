@@ -1,5 +1,7 @@
+<% provide :my_title, "你好，我是 Title" %>
+
 <h1>候選人列表</h1>
-<%= link_to "新增候選人", new_candidate_path %>
+<%= icon_link_to "新增候選人", new_candidate_path, "plus" %>
 
 <table class="table">
   <thead>
@@ -10,21 +12,12 @@
       <td>得票數</td>
       <td>得票數</td>
       <td>處理</td>
+      <td><%= user_gender(-1) %></td>
     </tr>
   </thead>
   <tbody>
-    <% @candidates.each do |candidate| %>
-    <tr>
-      <td><%= link_to "投給這位",vote_candidate_path(candidate), method: "post", data: { confirm: "確定投給這個人?" }, class:"btn btn-danger btn-xl"  %></td>
-      <td><%= candidate.name %>(年齡：<%= candidate.age %> 歲)</td>
-      <td><%= candidate.party %></td>
-      <td><%= candidate.politics %></td>
-      <td><%= candidate.vote_logs.size %></td>
-      <td>
-        <%= link_to "編輯", edit_candidate_path(candidate) %>
-        <%= link_to "刪除", candidate_path(candidate), method: "delete", data: {confirm: "確認刪除" } %>
-      </td>
-    </tr>
-    <% end %>
+    <%= render @candidates %>
+    <%= render "banner", content: "我是廣告的內容2" %>
   </tbody>
+
 </table>

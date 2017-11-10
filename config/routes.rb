@@ -4,5 +4,6 @@ Rails.application.routes.draw do
       post :vote
     end
   end
+  root "candidates#index"
 end
 

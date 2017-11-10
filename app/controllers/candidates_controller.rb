@@ -1,8 +1,10 @@
 class CandidatesController < ApplicationController
+  #layout false
   before_action :find_candidate, only: [:edit, :update, :destroy, :vote]
 
   def index
-    @candidates = Candidate.all  
+    @candidates = Candidate.all
+
   end
 
   def new
@@ -14,7 +16,7 @@ class CandidatesController < ApplicationController
 
     if @candidate.save
       # 成功
-      redirect_to candidates_path, notice: "新增候選人成功!"
+      redirect_to candidates_path, notice: '新增候選人成功!'
     else
       # 失敗
       render :new
@@ -22,7 +24,7 @@ class CandidatesController < ApplicationController
       #
       #
       #
-    
+
     end
   end
 
@@ -45,9 +47,9 @@ class CandidatesController < ApplicationController
     redirect_to candidates_path, notice: "完成投票!"
   end
   def method_name
-    
+
   end
-  
+
   def destroy
     @candidate.destroy if @candidate
     redirect_to candidates_path, notice: "候選人資料已刪除!"
